@@ -33,7 +33,7 @@ class RxScalaIntegrationSpec extends WordSpec with Matchers {
     }
 
     "mapFuture" in {
-      res(impl.mapFuture(Observable.from(List(1, 2, 10)))(x ⇒ Future.successful(x + 1))) should be (List(2, 3, 11))
+      res(impl.mapFuture(Observable.from(List(1, 2, 10)))(x ⇒ Future.successful(x + 1))).toSet should be (Set(2, 3, 11))
     }
 
     "first" in {
