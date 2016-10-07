@@ -40,6 +40,10 @@ class RxScalaIntegrationSpec extends WordSpec with Matchers {
       res(impl.first(Observable.from(List(1, 2, 3)))) should be (1)
     }
 
+    "first throws error on error" in {
+      an [IllegalStateException] should be thrownBy res(impl.first(Observable.error(new IllegalStateException())))
+    }
+
     "first throws error on empty" in {
       an [IllegalStateException] should be thrownBy res(impl.first(Observable.from(Nil)))
     }
