@@ -1,6 +1,6 @@
 name := "sangria-rxscala"
 organization := "org.sangria-graphql"
-version := "0.1.0-SNAPSHOT"
+version := "0.1.0"
 
 description := "Sangria RxScala integration"
 homepage := Some(url("http://sangria-graphql.org"))
@@ -10,7 +10,7 @@ scalaVersion := "2.11.8"
 scalacOptions ++= Seq("-deprecation", "-feature")
 
 libraryDependencies ++= Seq(
-  "org.sangria-graphql" %% "sangria-streaming-api" % "0.1.0-SNAPSHOT",
+  "org.sangria-graphql" %% "sangria-streaming-api" % "0.1.0",
   "io.reactivex" %% "rxscala" % "0.26.2",
   "org.scalatest" %% "scalatest" % "2.2.6" % "test"
 )
