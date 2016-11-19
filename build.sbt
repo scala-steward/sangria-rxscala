@@ -1,6 +1,6 @@
 name := "sangria-rxscala"
 organization := "org.sangria-graphql"
-version := "0.1.1"
+version := "0.1.2-SNAPSHOT"
 
 description := "Sangria RxScala integration"
 homepage := Some(url("http://sangria-graphql.org"))
