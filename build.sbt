@@ -1,18 +1,27 @@
 name := "sangria-rxscala"
 organization := "org.sangria-graphql"
-version := "0.1.0-SNAPSHOT"
+version := "0.1.1"
 
 description := "Sangria RxScala integration"
 homepage := Some(url("http://sangria-graphql.org"))
 licenses := Seq("Apache License, ASL Version 2.0" → url("http://www.apache.org/licenses/LICENSE-2.0"))
 
-scalaVersion := "2.11.8"
+scalaVersion := "2.12.0"
+crossScalaVersions := Seq("2.11.8", "2.12.0")
+
 scalacOptions ++= Seq("-deprecation", "-feature")
 
+scalacOptions ++= {
+  if (scalaVersion.value startsWith "2.12")
+    Seq.empty
+  else
+    Seq("-target:jvm-1.7")
+}
+
 libraryDependencies ++= Seq(
-  "org.sangria-graphql" %% "sangria-streaming-api" % "0.1.0",
-  "io.reactivex" %% "rxscala" % "0.26.2",
-  "org.scalatest" %% "scalatest" % "2.2.6" % "test"
+  "org.sangria-graphql" %% "sangria-streaming-api" % "0.1.1",
+  "io.reactivex" %% "rxscala" % "0.26.4",
+  "org.scalatest" %% "scalatest" % "3.0.0" % "test"
 )
 
 git.remoteRepo := "git@github.com:sangria-graphql/sangria-rxscala.git"
