@@ -2,7 +2,6 @@ package sangria.streaming
 
 import java.util.concurrent.atomic.AtomicInteger
 
-import org.scalatest.{Matchers, WordSpec}
 import rx.lang.scala.Observable
 import rx.lang.scala.subjects.PublishSubject
 import sangria.streaming.rxscala.ObservableSubscriptionStream
@@ -11,8 +10,10 @@ import scala.concurrent.duration._
 import scala.concurrent.{Await, Future}
 import scala.language.postfixOps
 import scala.concurrent.ExecutionContext.Implicits.global
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
-class RxScalaIntegrationSpec extends WordSpec with Matchers {
+class RxScalaIntegrationSpec extends AnyWordSpec with Matchers {
   val impl: SubscriptionStream[Observable] = new ObservableSubscriptionStream
 
   "RxScala Integration" should {
