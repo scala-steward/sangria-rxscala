@@ -6,21 +6,21 @@ description := "Sangria RxScala integration"
 homepage := Some(url("http://sangria-graphql.org"))
 licenses := Seq("Apache License, ASL Version 2.0" → url("http://www.apache.org/licenses/LICENSE-2.0"))
 
-scalaVersion := "2.12.10"
-crossScalaVersions := Seq("2.11.12", scalaVersion.value)
+scalaVersion := "2.13.1"
+crossScalaVersions := Seq("2.11.12", "2.12.10", scalaVersion.value)
 
 scalacOptions ++= Seq("-deprecation", "-feature")
 
 scalacOptions ++= {
-  if (scalaVersion.value startsWith "2.12")
-    Seq.empty
-  else
+  if (scalaVersion.value startsWith "2.11")
     Seq("-target:jvm-1.7")
+  else
+    Seq.empty
 }
 
 libraryDependencies ++= Seq(
   "org.sangria-graphql" %% "sangria-streaming-api" % "1.0.1",
-  "io.reactivex" %% "rxscala" % "0.26.5",
+  "io.reactivex" %% "rxscala" % "0.27.0",
   "org.scalatest" %% "scalatest" % "3.1.0" % Test
 )
 
@@ -31,7 +31,7 @@ releaseCrossBuild := true
 releasePublishArtifactsAction := PgpKeys.publishSigned.value
 publishMavenStyle := true
 publishArtifact in Test := false
-pomIncludeRepository := (_ ⇒ false)
+pomIncludeRepository := (_ => false)
 publishTo := Some(
   if (version.value.trim.endsWith("SNAPSHOT"))
     "snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
@@ -47,7 +47,7 @@ enablePlugins(SiteScaladocPlugin)
 
 // nice *magenta* prompt!
 
-shellPrompt in ThisBuild := { state ⇒
+shellPrompt in ThisBuild := { state =>
   scala.Console.MAGENTA + Project.extract(state).currentRef.project + "> " + scala.Console.RESET
 }
 
