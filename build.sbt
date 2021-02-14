@@ -6,8 +6,12 @@ description := "Sangria RxScala integration"
 homepage := Some(url("http://sangria-graphql.org"))
 licenses := Seq("Apache License, ASL Version 2.0" → url("http://www.apache.org/licenses/LICENSE-2.0"))
 
-scalaVersion := "2.13.4"
-crossScalaVersions := Seq("2.12.12", scalaVersion.value)
+ThisBuild / crossScalaVersions := Seq("2.12.12", "2.13.4")
+ThisBuild / scalaVersion := crossScalaVersions.value.last
+ThisBuild / githubWorkflowPublishTargetBranches := List()
+ThisBuild / githubWorkflowBuildPreamble ++= List(
+  WorkflowStep.Sbt(List("mimaReportBinaryIssues"), name = Some("Check binary compatibility"))
+)
 
 scalacOptions ++= Seq("-deprecation", "-feature")
 
