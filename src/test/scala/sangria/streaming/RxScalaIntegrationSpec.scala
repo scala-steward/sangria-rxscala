@@ -143,9 +143,9 @@ class RxScalaIntegrationSpec extends AnyWordSpec with Matchers {
     }
   }
 
-  def res[T](obs: Observable[T]) =
+  def res[T](obs: Observable[T]): List[T] =
     obs.toBlocking.toList
 
-  def res[T](f: Future[T]) =
+  def res[T](f: Future[T]): T =
     Await.result(f, 2 seconds)
 }
