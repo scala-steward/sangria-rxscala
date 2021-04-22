@@ -28,17 +28,21 @@ libraryDependencies ++= Seq(
 
 git.remoteRepo := "git@github.com:sangria-graphql/sangria-rxscala.git"
 
-// Publishing
-releaseCrossBuild := true
-releasePublishArtifactsAction := PgpKeys.publishSigned.value
-publishMavenStyle := true
-publishArtifact in Test := false
-pomIncludeRepository := (_ => false)
-publishTo := Some(
-  if (version.value.trim.endsWith("SNAPSHOT"))
-    "snapshots".at("https://oss.sonatype.org/content/repositories/snapshots")
-  else
-    "releases".at("https://oss.sonatype.org/service/local/staging/deploy/maven2"))
+// Release
+ThisBuild / githubWorkflowTargetTags ++= Seq("v*")
+ThisBuild / githubWorkflowPublishTargetBranches :=
+  Seq(RefPredicate.StartsWith(Ref.Tag("v")))
+  ThisBuild / githubWorkflowPublish := Seq(
+  WorkflowStep.Sbt(
+    List("ci-release"),
+    env = Map(
+      "PGP_PASSPHRASE" -> "${{ secrets.PGP_PASSPHRASE }}",
+      "PGP_SECRET" -> "${{ secrets.PGP_SECRET }}",
+      "SONATYPE_PASSWORD" -> "${{ secrets.SONATYPE_PASSWORD }}",
+      "SONATYPE_USERNAME" -> "${{ secrets.SONATYPE_USERNAME }}"
+    )
+  )
+)
 
 resolvers += "Sonatype snapshots".at("https://oss.sonatype.org/content/repositories/snapshots/")
 
@@ -64,6 +68,6 @@ developers := Developer(
   url("https://github.com/OlegIlyenko")) :: Nil
 scmInfo := Some(
   ScmInfo(
-    browseUrl = url("https://github.com/sangria-graphql/sangria-rxscala.git"),
+    browseUrl = url("https://github.com/sangria-graphql/sangria-rxscala"),
     connection = "scm:git:git@github.com:sangria-graphql/sangria-rxscala.git"
   ))
