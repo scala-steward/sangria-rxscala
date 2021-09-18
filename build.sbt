@@ -23,7 +23,7 @@ javacOptions ++= Seq("-source", "8", "-target", "8")
 libraryDependencies ++= Seq(
   "org.sangria-graphql" %% "sangria-streaming-api" % "1.0.3",
   "io.reactivex" %% "rxscala" % "0.27.0",
-  "org.scalatest" %% "scalatest" % "3.2.9" % Test
+  "org.scalatest" %% "scalatest" % "3.2.10" % Test
 )
 
 git.remoteRepo := "git@github.com:sangria-graphql/sangria-rxscala.git"
