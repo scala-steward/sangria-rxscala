@@ -45,7 +45,7 @@ class RxScalaIntegrationSpec extends AnyWordSpec with Matchers {
 
     "first throws error on error" in {
       an[IllegalStateException] should be thrownBy res(
-        impl.first(Observable.error(new IllegalStateException())))
+        impl.first(Observable.error(new IllegalStateException)))
     }
 
     "first throws error on empty" in {
@@ -108,13 +108,13 @@ class RxScalaIntegrationSpec extends AnyWordSpec with Matchers {
 
       val result = res(impl.merge(Vector(obs1, obs2, obs3)))
 
-      result should (have(size(6))
+      result should have(size(6))
         .and(contain(1))
         .and(contain(2))
         .and(contain(3))
         .and(contain(4))
         .and(contain(100))
-        .and(contain(200)))
+        .and(contain(200))
     }
 
     "merge 2" in {
@@ -123,11 +123,11 @@ class RxScalaIntegrationSpec extends AnyWordSpec with Matchers {
 
       val result = res(impl.merge(Vector(obs1, obs2)))
 
-      result should (have(size(4))
+      result should have(size(4))
         .and(contain(1))
         .and(contain(2))
         .and(contain(100))
-        .and(contain(200)))
+        .and(contain(200))
     }
 
     "merge 1" in {
@@ -135,7 +135,7 @@ class RxScalaIntegrationSpec extends AnyWordSpec with Matchers {
 
       val result = res(impl.merge(Vector(obs1)))
 
-      result should (have(size(2)).and(contain(1)).and(contain(2)))
+      result should have(size(2)).and(contain(1)).and(contain(2))
     }
 
     "merge throws exception on empty" in {
