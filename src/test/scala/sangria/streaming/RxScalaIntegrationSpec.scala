@@ -147,5 +147,5 @@ class RxScalaIntegrationSpec extends AnyWordSpec with Matchers {
     obs.toBlocking.toList
 
   def res[T](f: Future[T]): T =
-    Await.result(f, 2 seconds)
+    Await.result(f, 2.seconds)
 }
